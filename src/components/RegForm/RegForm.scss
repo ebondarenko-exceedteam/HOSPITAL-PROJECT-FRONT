@@ -35,6 +35,14 @@
     border-radius: 4px;
   }
 
+  .regForm_error {
+    height: 30px;
+
+    p {
+      color: red;
+    }
+  }
+
   label + input, input + label {
     margin-top: 8px;
   }
