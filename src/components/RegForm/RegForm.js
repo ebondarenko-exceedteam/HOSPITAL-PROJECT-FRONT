@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
 import './RegForm.scss'
 
 const RegForm = () => {
+  const [password, setPassword] = useState();
+  
   const {
     register,
     formState: {
-      errors
+      errors,
     },
     reset,
     handleSubmit
@@ -14,8 +17,12 @@ const RegForm = () => {
     mode: 'onBlur'
   });
 
-  const hendlerSubmit = (data) => {
-    alert(JSON.stringify(data));
+  const hendlerSubmit = ({regFormLogin, regFormPassword}) => {
+    axios.post('http://localhost:8000/createNewUser', {
+      login: regFormLogin,
+      password: regFormPassword
+    }).then(res => console.log(res.data.data))
+
     reset();
   }
 
@@ -52,7 +59,8 @@ const RegForm = () => {
             pattern: {
               value: /^(?=.*\d)[a-zA-Z\d]{6,25}$/,
               message: 'Только латинские буквы и минимум 1 цифра'
-            }
+            },
+            onBlur: e => setPassword(e.target.value)
           })}
         />
         <div className='regForm_error'>
@@ -65,18 +73,11 @@ const RegForm = () => {
           placeholder='Password'
           {...register('regFormRepeatPassword', {
             required: 'Поле обязательно к заполнению',
-            minLength: {
-              value: 6,
-              message: 'Минимум 6 символов'
-            },
-            pattern: {
-              value: /^(?=.*\d)[a-zA-Z\d]{6,25}$/,
-              message: 'Только латинские буквы и минимум 1 цифра'
-            }
+            validate: (input) => input === password,
           })}
         />
         <div className='regForm_error'>
-          {errors.regFormRepeatPassword && <p>{errors.regFormRepeatPassword.message || 'Error!'}</p>}
+          {errors.regFormRepeatPassword && <p>{'Пароль не совпадает'}</p>}
         </div>
         <button>Зарегистрироваться</button>
         <p className='regForm_link'>Авторизоваться</p>
