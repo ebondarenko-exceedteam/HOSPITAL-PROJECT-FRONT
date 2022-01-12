@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import Snackbar from '@material-ui/core/Snackbar';
 import axios from 'axios';
 import './RegForm.scss'
 
 const RegForm = () => {
   const [password, setPassword] = useState();
+  const [user, setUser] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState();
   
   const {
     register,
@@ -17,17 +21,54 @@ const RegForm = () => {
     mode: 'onBlur'
   });
 
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   const hendlerSubmit = ({regFormLogin, regFormPassword}) => {
     axios.post('http://localhost:8000/createNewUser', {
       login: regFormLogin,
       password: regFormPassword
-    }).then(res => console.log(res.data.data))
+    }).then(res => {
+      const { token, login} = res.data;
+      const result = {token, login};
+      setUser(result)
+    }).catch(err => {
+      switch (err.response.status) {
+        case 400:
+          setMessage('Ошибка регистрации');
+          handleClick();
+          break;
+        case 401:
+          setMessage('Пользователь с таким логином уже существует');
+          handleClick();
+          break;
+      };
+    });
 
     reset();
   }
 
   return (
     <div className='regForm'>
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message={message}
+      />
       <p className='regForm_title'>Регистрация</p>
       <form onSubmit={handleSubmit(hendlerSubmit)}>
         <label>Login:</label>
@@ -39,6 +80,10 @@ const RegForm = () => {
             minLength: {
               value: 6,
               message: 'Минимум 6 символов'
+            },
+            pattern: {
+              value: /^\S+$/gm,
+              message: 'Не используйте пробелы'
             }
           })}
         />

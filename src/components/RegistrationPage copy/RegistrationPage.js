@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../Header/Header';
-import RegForm from './RegForm/RegForm';
+import RegForm from '../RegistrationPage/RegForm/RegForm';
 import regPageImage from '../../source/images/regPageImage.svg';
 import './RegistrationPage.scss';
 
