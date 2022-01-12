@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import Snackbar from '@material-ui/core/Snackbar';
+import Snackbars from '../../Snackbars/Snackbars';
 import axios from 'axios';
 import './RegForm.scss'
 
@@ -58,15 +58,10 @@ const RegForm = () => {
 
   return (
     <div className='regForm'>
-      <Snackbar
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
+      <Snackbars
         message={message}
+        open={open}
+        setOpen={setOpen}
       />
       <p className='regForm_title'>Регистрация</p>
       <form onSubmit={handleSubmit(hendlerSubmit)}>
