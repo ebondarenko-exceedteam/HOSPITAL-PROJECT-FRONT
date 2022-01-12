@@ -1,0 +1,65 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.regForm {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 4px;
+  height: 100%;
+  margin-top: 40px;
+  margin-bottom: 100px;
+
+  .regForm_title {
+    margin-top: 40px;
+    font-size: 36px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 40px 40px 25px 40px;
+  }
+
+  label {
+    font-size: 18px;
+  }
+
+  input {
+    font-size: 18px;
+    padding: 10px 20px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+
+  .regForm_error {
+    height: 30px;
+
+    p {
+      color: red;
+    }
+  }
+
+  label + input, input + label {
+    margin-top: 8px;
+  }
+
+  button {
+    align-self: flex-end;
+    margin-top: 15px;
+    padding: 10px 11px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    font-size: 18px;
+    line-height: 21px;
+  }
+
+  .regForm_link {
+    align-self: flex-end;
+    margin-top: 8px;
+    font-size: 18px;
+  }
+}
