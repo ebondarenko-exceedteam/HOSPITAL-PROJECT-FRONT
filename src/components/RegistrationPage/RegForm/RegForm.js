@@ -7,8 +7,10 @@ import './RegForm.scss'
 
 const RegForm = () => {
   const [password, setPassword] = useState();
-  const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState();
+  const [ messages, setMessages ] = useState({
+    open: false,
+    message: ''
+  })
   
   const {
     register,
@@ -21,10 +23,6 @@ const RegForm = () => {
     mode: 'onBlur'
   });
 
-  const handleClick = () => {
-    setOpen(true);
-  };
-
   const hendlerSubmit = ({regFormLogin, regFormPassword}) => {
     axios.post('http://localhost:8000/createNewUser', {
       login: regFormLogin,
@@ -36,12 +34,16 @@ const RegForm = () => {
     }).catch(err => {
       switch (err.response.status) {
         case 400:
-          setMessage('Ошибка регистрации');
-          handleClick();
+          setMessages({
+            open: true,
+            message: 'Ошибка регистрации'
+          });
           break;
         case 401:
-          setMessage('Пользователь с таким логином уже существует');
-          handleClick();
+          setMessages({
+            open: true,
+            message: 'Пользователь с таким логином уже существует'
+          });
           break;
       };
     });
@@ -52,9 +54,8 @@ const RegForm = () => {
   return (
     <div className='regForm'>
       <Snackbars
-        message={message}
-        open={open}
-        setOpen={setOpen}
+        messages={messages}
+        setMessages={setMessages}
       />
       <p className='regForm_title'>Регистрация</p>
       <form onSubmit={handleSubmit(hendlerSubmit)}>

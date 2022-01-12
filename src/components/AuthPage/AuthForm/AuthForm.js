@@ -6,8 +6,10 @@ import Snackbars from '../../Snackbars/Snackbars';
 import './AuthForm.scss'
 
 const AuthForm = () => {
-  const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState();
+  const [ messages, setMessages ] = useState({
+    open: false,
+    message: ''
+  })
   
   const {
     register,
@@ -18,10 +20,6 @@ const AuthForm = () => {
   } = useForm({
     mode: 'onBlur'
   });
-
-  const handleClick = () => {
-    setOpen(true);
-  };
 
   const hendlerSubmit = ({authFormLogin, authFormPassword}) => {
     axios.post('http://localhost:8000/authorizationUser', {
@@ -34,16 +32,22 @@ const AuthForm = () => {
     }).catch(err => {
       switch (err.response.status) {
         case 404:
-          setMessage('Такой пользователь не зарегистрирован');
-          handleClick();
+          setMessages({
+            open: true,
+            message: 'Такой пользователь не зарегистрирован'
+          });
           break;
         case 412:
-          setMessage('Неправильный пароль');
-          handleClick();
+          setMessages({
+            open: true,
+            message: 'Неправильный пароль'
+          });
           break;
         case 400:
-          setMessage('Ошибка авторизации');
-          handleClick();
+          setMessages({
+            open: true,
+            message: 'Ошибка авторизации'
+          });
           break;
       };
     });
@@ -52,9 +56,8 @@ const AuthForm = () => {
   return (
     <div className='authForm'>
       <Snackbars
-        message={message}
-        open={open}
-        setOpen={setOpen}
+        messages={messages}
+        setMessages={setMessages}
       />
       <p className='authForm_title'>Войти в систему</p>
       <form onSubmit={handleSubmit(hendlerSubmit)}>

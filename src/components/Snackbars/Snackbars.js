@@ -1,12 +1,19 @@
 import Snackbar from '@material-ui/core/Snackbar';
 
-const Snackbars = ({ message, setOpen, open }) => {
+const Snackbars = ({ messages, setMessages }) => {
+  const { open, message } = messages;
+  
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
 
-    setOpen(false);
+    setMessages(prev => {
+      return {
+        ...prev,
+        open: false
+      }
+    });
   };
 
   return (
