@@ -5,11 +5,11 @@ import regPageImage from '../../source/images/regPageImage.svg';
 import './RegistrationPage.scss';
 
 const RegistrationPage = () => {
-  const regHeaderTitle = 'Зарегистрироваться в системе';
-
   return (
     <div className='registration_page'>
-      <Header headerTitle={regHeaderTitle} />
+      <Header>
+        <p>Зарегистрироваться в системе</p>
+      </Header>
       <div className='registrationPage_content'>
         <img
           src={regPageImage}
@@ -18,8 +18,7 @@ const RegistrationPage = () => {
         <RegForm />
       </div>
     </div>
-    
-  )
+  );
 }
 
 export default RegistrationPage;

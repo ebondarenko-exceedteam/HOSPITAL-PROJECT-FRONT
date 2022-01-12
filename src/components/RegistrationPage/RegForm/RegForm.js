@@ -6,7 +6,6 @@ import './RegForm.scss'
 
 const RegForm = () => {
   const [password, setPassword] = useState();
-  const [user, setUser] = useState(null);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState();
   
@@ -38,9 +37,9 @@ const RegForm = () => {
       login: regFormLogin,
       password: regFormPassword
     }).then(res => {
-      const { token, login} = res.data;
-      const result = {token, login};
-      setUser(result)
+      const { token, login } = res.data;
+      const result = { token, login };
+      localStorage.setItem('user', JSON.stringify(result));
     }).catch(err => {
       switch (err.response.status) {
         case 400:

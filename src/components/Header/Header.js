@@ -2,7 +2,7 @@ import React from 'react';
 import headerLogo from '../../source/images/headerLogo.svg';
 import './Header.scss'
 
-const Header = ({headerTitle, textButton}) => {
+const Header = (props) => {
   return (
     <header>
       <div className='header_content'>
@@ -10,8 +10,7 @@ const Header = ({headerTitle, textButton}) => {
           src={headerLogo}
           alt='headerLogo'
         />
-        <p>{headerTitle}</p>
-        {textButton && <button>textButton</button>}
+        {props.children}
       </div>
     </header>
   )
