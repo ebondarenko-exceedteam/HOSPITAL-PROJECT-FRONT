@@ -10,7 +10,7 @@ const RegForm = () => {
   const [ messages, setMessages ] = useState({
     open: false,
     message: ''
-  })
+  });
   
   const {
     register,
