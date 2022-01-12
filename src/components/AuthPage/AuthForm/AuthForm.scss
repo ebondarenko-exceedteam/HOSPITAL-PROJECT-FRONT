@@ -3,7 +3,7 @@
   padding: 0;
 }
 
-.regForm {
+.authForm {
   display: flex;
   flex-direction: column;
   background-color: #fff;
@@ -12,7 +12,7 @@
   margin-top: 40px;
   margin-bottom: 100px;
 
-  .regForm_title {
+  .authForm_title {
     margin-top: 40px;
     font-size: 36px;
   }
@@ -35,7 +35,7 @@
     border-radius: 4px;
   }
 
-  .regForm_error {
+  .authForm_error {
     height: 30px;
 
     p {
@@ -62,7 +62,7 @@
     cursor: pointer;
   }
 
-  .regForm_link {
+  .authForm_link {
     align-self: flex-end;
     text-decoration: none;
     margin-top: 8px;

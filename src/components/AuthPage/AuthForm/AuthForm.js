@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Snackbars from '../../Snackbars/Snackbars';
-import './RegForm.scss'
+import './AuthForm.scss'
 
-const RegForm = () => {
-  const [password, setPassword] = useState();
+const AuthForm = () => {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState();
   
@@ -15,7 +14,6 @@ const RegForm = () => {
     formState: {
       errors,
     },
-    reset,
     handleSubmit
   } = useForm({
     mode: 'onBlur'
@@ -25,44 +23,46 @@ const RegForm = () => {
     setOpen(true);
   };
 
-  const hendlerSubmit = ({regFormLogin, regFormPassword}) => {
-    axios.post('http://localhost:8000/createNewUser', {
-      login: regFormLogin,
-      password: regFormPassword
+  const hendlerSubmit = ({authFormLogin, authFormPassword}) => {
+    axios.post('http://localhost:8000/authorizationUser', {
+      login: authFormLogin,
+      password: authFormPassword
     }).then(res => {
       const { token, login } = res.data;
       const result = { token, login };
       localStorage.setItem('user', JSON.stringify(result));
     }).catch(err => {
       switch (err.response.status) {
-        case 400:
-          setMessage('Ошибка регистрации');
+        case 404:
+          setMessage('Такой пользователь не зарегистрирован');
           handleClick();
           break;
-        case 401:
-          setMessage('Пользователь с таким логином уже существует');
+        case 412:
+          setMessage('Неправильный пароль');
+          handleClick();
+          break;
+        case 400:
+          setMessage('Ошибка авторизации');
           handleClick();
           break;
       };
     });
-
-    reset();
   }
 
   return (
-    <div className='regForm'>
+    <div className='authForm'>
       <Snackbars
         message={message}
         open={open}
         setOpen={setOpen}
       />
-      <p className='regForm_title'>Регистрация</p>
+      <p className='authForm_title'>Войти в систему</p>
       <form onSubmit={handleSubmit(hendlerSubmit)}>
         <label>Login:</label>
         <input
-          id='regFormLogin'
+          id='authFormLogin'
           placeholder='Login'
-          {...register('regFormLogin', {
+          {...register('authFormLogin', {
             required: 'Поле обязательно к заполнению',
             minLength: {
               value: 6,
@@ -74,15 +74,15 @@ const RegForm = () => {
             }
           })}
         />
-        <div className='regForm_error'>
-          {errors.regFormLogin && <p>{errors.regFormLogin.message || 'Error!'}</p>}
+        <div className='authForm_error'>
+          {errors.authFormLogin && <p>{errors.authFormLogin.message || 'Error!'}</p>}
         </div>
         <label>Password:</label>
         <input
           type='password'
-          id='regFormPassword'
+          id='authFormPassword'
           placeholder='Password'
-          {...register('regFormPassword', {
+          {...register('authFormPassword', {
             required: 'Поле обязательно к заполнению',
             minLength: {
               value: 6,
@@ -91,31 +91,17 @@ const RegForm = () => {
             pattern: {
               value: /^(?=.*\d)[a-zA-Z\d]{6,25}$/,
               message: 'Только латинские буквы и минимум 1 цифра'
-            },
-            onBlur: e => setPassword(e.target.value)
+            }
           })}
         />
-        <div className='regForm_error'>
-          {errors.regFormPassword && <p>{errors.regFormPassword.message || 'Error!'}</p>}
+        <div className='authForm_error'>
+          {errors.authFormPassword && <p>{errors.authFormPassword.message || 'Error!'}</p>}
         </div>
-        <label>Repeat password:</label>
-        <input
-          type='password'
-          id='regFormRepeatPassword'
-          placeholder='Password'
-          {...register('regFormRepeatPassword', {
-            required: 'Поле обязательно к заполнению',
-            validate: (input) => input === password,
-          })}
-        />
-        <div className='regForm_error'>
-          {errors.regFormRepeatPassword && <p>{'Пароль не совпадает'}</p>}
-        </div>
-        <button>Зарегистрироваться</button>
-        <Link to='/authorization' className='regForm_link'>Авторизоваться</Link>
+        <button>Войти</button>
+        <Link to='/registration' className='authForm_link'>Зарегистрироваться</Link>
       </form>
     </div>
   )
 }
 
-export default RegForm;
+export default AuthForm;
