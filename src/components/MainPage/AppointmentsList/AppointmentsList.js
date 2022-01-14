@@ -50,24 +50,3 @@ const AppointmentsList = ({ allAppointments, setAllAppointments }) => {
 }
 
 export default AppointmentsList;
-
-  // const allAppointments = [
-  //   {
-  //     name: 'Анна',
-  //     doctor: 'Елизавета Петровна',
-  //     date: '13-01-2022',
-  //     complaint: 'просто болею'
-  //   },
-  //   {
-  //     name: 'Валерий',
-  //     doctor: 'Ирина Викторовна',
-  //     date: '14-01-2022',
-  //     complaint: 'жалоба'
-  //   },
-  //   {
-  //     name: 'Геннадий',
-  //     doctor: 'Василий Сергеевич',
-  //     date: '15-01-2022',
-  //     complaint: 'диспансеризация'
-  //   }
-  // ];

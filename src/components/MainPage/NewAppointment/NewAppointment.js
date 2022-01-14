@@ -1,9 +1,12 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+// import moment from 'moment';
 import axios from 'axios';
 import './NewAppointment.scss';
 
-const NewAppointment = ({setAllAppointments}) => {
+const NewAppointment = ({ setAllAppointments }) => {
+  // const date = moment().format('yyyy-mm-dd');
+  // console.log(date);
   let today = new Date();
   const dd = String(today.getDate()).padStart(2, '0');
   const mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -21,7 +24,7 @@ const NewAppointment = ({setAllAppointments}) => {
     mode: 'onBlur'
   });
 
-  const hendlerSubmit = (data) => {
+  const handlerSubmit = (data) => {
     const {
       appointmentName,
       appointmentDoctor,
@@ -39,7 +42,7 @@ const NewAppointment = ({setAllAppointments}) => {
       },
       {
         headers: {
-        'Authorization': token
+          'Authorization': token
         }
       }
     ).then(res => setAllAppointments(res.data.data));
@@ -48,61 +51,65 @@ const NewAppointment = ({setAllAppointments}) => {
 
   return (
     <div className='newAppointment'>
-      <form className='appointments_form' onSubmit={handleSubmit(hendlerSubmit)}>
+      <form className='appointments_form' onSubmit={handleSubmit(handlerSubmit)}>
         <div className='appointments_form_item'>
           <label>Имя:</label>
-            <input
-              {...register('appointmentName', {
-                required: 'Введите ФИО',
-                pattern: {
-                  value: /^[a-zA-Zа-яА-Я]+$/,
-                  message: 'Только русские или латинские буквы'
-                }
-              })}
-            />
-            <div className='appointmentForm_error'>
+          <input
+            {...register('appointmentName', {
+              required: 'Введите ФИО',
+              pattern: {
+                value: /^[a-zA-Zа-яА-Я]+$/,
+                message: 'Только русские или латинские буквы'
+              }
+            })}
+          />
+          <div className='appointmentForm_error'>
             {errors.appointmentName && <p>{errors.appointmentName.message || 'Error!'}</p>}
           </div>
         </div>
         <div className='appointments_form_item'>
           <label>Врач:</label>
-            <select
-              {...register('appointmentDoctor', {
-                required: 'Выберите врача',
-                validate: input => input !== 'Выберите врача' || 'Выберите врача'
-              })}
-            >
-              <option value='Выберите врача'>Выберите врача</option>
-              <option value='Иванов Андрей Евгеньевич'>Иванов Андрей Евгеньевич</option>
-              <option value='Фоменко Наталья Юрьевна'>Фоменко Наталья Юрьевна</option>
-              <option value='Кузнецова Марина Андреевна'>Кузнецова Марина Андреевна</option>
-              <option value='Радищев Сергей Петрович'>Радищев Сергей Петрович</option>
-            </select>
-            <div className='appointmentForm_error'>
+          <select
+            {...register('appointmentDoctor', {
+              required: 'Выберите врача',
+              validate: input => input !== 'Выберите врача' || 'Выберите врача'
+            })}
+          >
+            <option value='Выберите врача'>Выберите врача</option>
+            <option value='Иванов Андрей Евгеньевич'>Иванов Андрей Евгеньевич</option>
+            <option value='Фоменко Наталья Юрьевна'>Фоменко Наталья Юрьевна</option>
+            <option value='Кузнецова Марина Андреевна'>Кузнецова Марина Андреевна</option>
+            <option value='Радищев Сергей Петрович'>Радищев Сергей Петрович</option>
+          </select>
+          <div className='appointmentForm_error'>
             {errors.appointmentDoctor && <p>{errors.appointmentDoctor.message || 'Error!'}</p>}
           </div>
         </div>
         <div className='appointments_form_item'>
           <label>Дата:</label>
-            <input
-              type='date'
-              min={today}
-              {...register('appointmentDate', {
-                required: 'Выберите дату приёма',
-              })}
-            />
-            <div className='appointmentForm_error'>
+          <input
+            type='date'
+            min={today}
+            {...register('appointmentDate', {
+              required: 'Выберите дату приёма',
+              min: {
+                value: today,
+                message: 'Нельзя выбрать прошедшую дату'
+              },
+            })}
+          />
+          <div className='appointmentForm_error'>
             {errors.appointmentDate && <p>{errors.appointmentDate.message || 'Error!'}</p>}
           </div>
         </div>
         <div className='appointments_form_item'>
           <label>Жалобы:</label>
-            <textarea
-              {...register('appointmentСomplaint', {
-                required: 'Что Вас беспокоит?'
-              })}
-            />
-            <div className='appointmentForm_error'>
+          <textarea
+            {...register('appointmentСomplaint', {
+              required: 'Что Вас беспокоит?'
+            })}
+          />
+          <div className='appointmentForm_error'>
             {errors.appointmentСomplaint && <p>{errors.appointmentСomplaint.message || 'Error!'}</p>}
           </div>
         </div>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 import NewAppointment from './NewAppointment/NewAppointment';
 import AppointmentsList from './AppointmentsList/AppointmentsList';
+// import EditPage from './EditPage/EditPage';
 import './MainPage.scss';
 
 const MainPage = () => {
@@ -21,6 +22,7 @@ const MainPage = () => {
         allAppointments={allAppointments}
         setAllAppointments={setAllAppointments}
       />
+      {/* <EditPage /> */}
     </div>
   )
 }
