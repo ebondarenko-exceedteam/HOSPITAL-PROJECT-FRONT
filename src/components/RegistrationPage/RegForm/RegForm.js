@@ -29,9 +29,7 @@ const RegForm = () => {
       login: regFormLogin,
       password: regFormPassword
     }).then(res => {
-      const { token, login } = res.data;
-      const result = { token, login };
-      localStorage.setItem('user', JSON.stringify(result));
+      localStorage.setItem('user', JSON.stringify(res.data));
       setlocalToken(JSON.parse(localStorage.getItem('user')));
     }).catch(err => {
       switch (err.response.status) {

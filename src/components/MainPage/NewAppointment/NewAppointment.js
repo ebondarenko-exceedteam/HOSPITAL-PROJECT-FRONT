@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
-import './Appointment.scss';
+import axios from 'axios';
+import './NewAppointment.scss';
 
-const Appointment = () => {
+const NewAppointment = ({setAllAppointments}) => {
   let today = new Date();
   const dd = String(today.getDate()).padStart(2, '0');
   const mm = String(today.getMonth() + 1).padStart(2, '0');
   const yyyy = today.getFullYear();
   today = (`${yyyy}-${mm}-${dd}`);
-
-  // const [ date, setDate ] = useState(today);
-
+  const { token, _id } = JSON.parse(localStorage.getItem('user'));
   const {
     register,
     formState: {
@@ -23,12 +22,32 @@ const Appointment = () => {
   });
 
   const hendlerSubmit = (data) => {
-    console.log(data);
+    const {
+      appointmentName,
+      appointmentDoctor,
+      appointmentDate,
+      appointmentСomplaint
+    } = data;
+    axios.post(
+      'http://localhost:8000/createNewAppointment',
+      {
+        userId: _id,
+        name: appointmentName,
+        doctor: appointmentDoctor,
+        date: appointmentDate,
+        complaint: appointmentСomplaint
+      },
+      {
+        headers: {
+        'Authorization': token
+        }
+      }
+    ).then(res => setAllAppointments(res.data.data));
     reset();
   }
 
   return (
-    <div className='appointments'>
+    <div className='newAppointment'>
       <form className='appointments_form' onSubmit={handleSubmit(hendlerSubmit)}>
         <div className='appointments_form_item'>
           <label>Имя:</label>
@@ -93,4 +112,4 @@ const Appointment = () => {
   )
 }
 
-export default Appointment;
+export default NewAppointment;

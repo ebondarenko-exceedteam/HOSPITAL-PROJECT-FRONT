@@ -1,0 +1,71 @@
+.appointments_content {
+  margin: 25px 25px 0 25px;
+}
+
+.appointments_header {
+  display: flex;
+  height: 60px;
+  align-items: center;
+  background: #C4C4C4;
+
+  p {
+    font-size: 18px;
+    line-height: 21px;
+  }
+
+  .appointments_header_name {
+    width: 25%;
+  }
+
+  .appointments_header_doctor {
+    width: 25%;
+  }
+
+  .appointments_header_date {
+    width: 15%;
+  }
+
+  .appointments_header_appointment {
+    width: 30%;
+  }
+
+  .appointments_header_empty {
+    width: 5%;
+  }
+}
+
+.appointments_list {
+  background-color: #fff;
+  border: 1px solid #000;
+}
+
+.appointment_block {
+  display: flex;
+  padding-top: 20px;
+
+  .appointments_block_name {
+    width: 25%;
+  }
+
+  .appointments_block_doctor {
+    width: 25%;
+  }
+
+  .appointments_block_date {
+    width: 15%;
+  }
+
+  .appointments_block_appointment {
+    width: 30%;
+  }
+
+  .appointment_block_buttons {
+    width: 5%;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  img:hover {
+    cursor: pointer;
+  }
+}

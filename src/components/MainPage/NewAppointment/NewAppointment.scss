@@ -1,6 +1,6 @@
-.appointments {
+.newAppointment {
   padding: 20px 40px;
-  // display: flex;
+  display: flex;
   background-color: #C5E9FF;
   align-items: center;
   box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.25);
@@ -17,6 +17,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 18%;
 
     input, select, textarea {
       width: 100%;
@@ -26,7 +27,6 @@
     }
 
     textarea {
-      min-width: 300px;
       max-width: 300px;
       min-height: 45px;
       max-height: 100px;
@@ -49,6 +49,7 @@
     font-size: 18px;
     line-height: 21px;
     margin-bottom: 20px;
+    width: 20%;
   }
 
   button:hover {
