@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-// import moment from 'moment';
+import moment from 'moment';
 import axios from 'axios';
 import './NewAppointment.scss';
 
 const NewAppointment = ({ setAllAppointments }) => {
-  // const date = moment().format('yyyy-mm-dd');
-  // console.log(date);
-  let today = new Date();
-  const dd = String(today.getDate()).padStart(2, '0');
-  const mm = String(today.getMonth() + 1).padStart(2, '0');
-  const yyyy = today.getFullYear();
-  today = (`${yyyy}-${mm}-${dd}`);
+  const [doctors, setDoctors] = useState([
+    'Выберите врача',
+    'Иванов Андрей Евгеньевич',
+    'Фоменко Наталья Юрьевна',
+    'Кузнецова Марина Андреевна',
+    'Радищев Сергей Петрович'
+  ])
+  const today = moment().format('YYYY-MM-DD');
   const { token, _id } = JSON.parse(localStorage.getItem('user'));
   const {
     register,
@@ -31,6 +32,7 @@ const NewAppointment = ({ setAllAppointments }) => {
       appointmentDate,
       appointmentСomplaint
     } = data;
+
     axios.post(
       'http://localhost:8000/createNewAppointment',
       {
@@ -75,11 +77,16 @@ const NewAppointment = ({ setAllAppointments }) => {
               validate: input => input !== 'Выберите врача' || 'Выберите врача'
             })}
           >
-            <option value='Выберите врача'>Выберите врача</option>
-            <option value='Иванов Андрей Евгеньевич'>Иванов Андрей Евгеньевич</option>
-            <option value='Фоменко Наталья Юрьевна'>Фоменко Наталья Юрьевна</option>
-            <option value='Кузнецова Марина Андреевна'>Кузнецова Марина Андреевна</option>
-            <option value='Радищев Сергей Петрович'>Радищев Сергей Петрович</option>
+            {
+              doctors.map((item, index) => (
+                <option
+                  key={`doctor${index}`}
+                  value={item}
+                >
+                  {item}
+                </option>
+              ))
+            }
           </select>
           <div className='appointmentForm_error'>
             {errors.appointmentDoctor && <p>{errors.appointmentDoctor.message || 'Error!'}</p>}

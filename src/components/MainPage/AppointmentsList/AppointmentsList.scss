@@ -1,63 +1,45 @@
-.appointments_content {
-  margin: 25px 25px 0 25px;
-}
+.appointment_container {
+  margin: 25px;
 
-.appointments_header {
-  display: flex;
-  height: 60px;
-  align-items: center;
-  background: #C4C4C4;
+  .appointment_table {
+    width: 96%;
 
-  p {
-    font-size: 18px;
-    line-height: 21px;
-  }
+    &_head {
+      background-color: #C4C4C4;
+      border-bottom: 1px solid #000;
 
-  .appointments_header_name, .appointments_header_doctor {
-    width: 25%;
-  }
+      &_row {
+        &_cell {
+          font-size: 18px;
+          text-align: center;
+        }
+      }
+    }
 
-  .appointments_header_date {
-    width: 15%;
-  }
+    .appointment_table_body {
+      background-color: #fff;
+      border: 1px solid #000;
 
-  .appointments_header_appointment {
-    width: 30%;
-  }
+      &_row {
+        width: 90%;
+        
+        &_cell {
+          border-left: 1px solid #000;
+          border-bottom: none;
+          font-size: 18px;
+          text-align: center;
 
-  .appointments_header_empty {
-    width: 5%;
-  }
-}
+          img {
+            &:hover {
+              cursor: pointer;
+            }
+          }
 
-.appointments_list {
-  background-color: #fff;
-  border: 1px solid #000;
-}
-
-.appointment_block {
-  display: flex;
-  padding-top: 20px;
-
-  .appointments_block_name {
-    width: 25%;
-  }
-
-  .appointments_block_doctor, .appointments_block_date {
-    width: 25%;
-  }
-
-  .appointments_block_appointment {
-    width: 30%;
-  }
-
-  .appointment_block_buttons {
-    width: 5%;
-    display: flex;
-    justify-content: space-around;
-  }
-
-  img:hover {
-    cursor: pointer;
+          img + img {
+            margin-left: 25px;
+          }
+        }
+      }
+    }
   }
 }

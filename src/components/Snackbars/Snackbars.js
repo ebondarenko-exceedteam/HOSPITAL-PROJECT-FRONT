@@ -1,4 +1,4 @@
-import Snackbar from '@material-ui/core/Snackbar';
+import { Snackbar } from '@mui/material';
 
 const Snackbars = ({ messages, setMessages }) => {
   const { open, message } = messages;
