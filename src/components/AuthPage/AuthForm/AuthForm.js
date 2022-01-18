@@ -27,8 +27,8 @@ const AuthForm = () => {
       login: authFormLogin,
       password: authFormPassword
     }).then(res => {
-      localStorage.setItem('user', JSON.stringify(res.data));
-      setlocalToken(JSON.parse(localStorage.getItem('user')));
+      localStorage.setItem('token', res.data.token);
+      setlocalToken(localStorage.getItem('token'));
     }).catch(err => {
       switch (err.response.status) {
         case 404:

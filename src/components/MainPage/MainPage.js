@@ -5,12 +5,14 @@ import Header from '../Header/Header';
 import NewAppointment from './NewAppointment/NewAppointment';
 import AppointmentsList from './AppointmentsList/AppointmentsList';
 // import EditPopup from './EditPopup/EditPopup';
+// import DeletePopup from './DeletePopup/DeletePopup';
 import './MainPage.scss';
 
 const MainPage = () => {
   const [ allAppointments, setAllAppointments ] = useState([]);
   const [ index, setIndex ] = useState('');
-  const [ open, setOpen ] = useState(false);
+  const [ openEdit, setOpenEdit ] = useState(false);
+  const [ openDelete, setOpenDelete ] = useState(false);
   const [ doctors, setDoctors ] = useState([
     'Выберите врача',
     'Иванов Андрей Евгеньевич',
@@ -35,14 +37,23 @@ const MainPage = () => {
         allAppointments={allAppointments}
         setAllAppointments={setAllAppointments}
         setIndex={setIndex}
-        setOpen={setOpen}
+        setOpenEdit={setOpenEdit}
+        setOpenDelete={setOpenDelete}
       />
-      {/* {open && <EditPopup
-        open={open}
-        setOpen={setOpen}
+      {/* {openEdit && <EditPopup
+        open={openEdit}
+        setOpen={setOpenEdit}
         today={today}
         doctors={doctors}
         appointment={allAppointments[index]}
+        setAllAppointments={setAllAppointments}
+      />}
+      {openDelete && <DeletePopup
+        open={openDelete}
+        setOpen={setOpenDelete}
+        today={today}
+        doctors={doctors}
+        _id={allAppointments[index]._id}
         setAllAppointments={setAllAppointments}
       />} */}
     </div>

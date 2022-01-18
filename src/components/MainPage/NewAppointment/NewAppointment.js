@@ -4,7 +4,7 @@ import axios from 'axios';
 import './NewAppointment.scss';
 
 const NewAppointment = ({ setAllAppointments, doctors, today }) => {
-  const { token } = JSON.parse(localStorage.getItem('user'));
+  const token = localStorage.getItem('token');
   const {
     register,
     formState: {

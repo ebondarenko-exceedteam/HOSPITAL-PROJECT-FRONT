@@ -13,8 +13,8 @@ import editLogo from '../../../source/images/edit.svg';
 import './AppointmentsList.scss';
 
 const AppointmentsList = (props) => {
-  const { allAppointments, setAllAppointments, setIndex, setOpen } = props;
-  const { token } = JSON.parse(localStorage.getItem('user'));
+  const { allAppointments, setAllAppointments, setIndex, setOpenEdit, setOpenDelete } = props;
+  const token = localStorage.getItem('token');
   const [headItems, setHeadItems] = useState([
     'Имя',
     'Врач',
@@ -33,7 +33,12 @@ const AppointmentsList = (props) => {
 
   const editAppointment = (index) => {
     setIndex(index);
-    setOpen(true);
+    setOpenEdit(true);
+  }
+
+  const deleteAppointment = (index) => {
+    setIndex(index);
+    setOpenDelete(true);
   }
 
   return (
@@ -66,6 +71,7 @@ const AppointmentsList = (props) => {
                 <TableCell className='appointment_table_body_row_cell'>{item.complaint}</TableCell>
                 <TableCell className='appointment_table_body_row_cell'>
                   <img
+                    onClick={() => deleteAppointment(index)}
                     src={deleteLogo}
                     alt='deleteLogo'
                   />
