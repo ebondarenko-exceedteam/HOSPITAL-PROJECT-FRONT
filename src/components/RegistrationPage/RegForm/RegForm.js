@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Snackbars from '../../Snackbars/Snackbars';
 import './RegForm.scss'
 
 const RegForm = () => {
-  const [password, setPassword] = useState();
+  const [ password, setPassword ] = useState();
   const [ messages, setMessages ] = useState({
     open: false,
     message: ''
   });
+  const [ localToken, setlocalToken ] = useState(false);
   
   const {
     register,
@@ -28,9 +29,8 @@ const RegForm = () => {
       login: regFormLogin,
       password: regFormPassword
     }).then(res => {
-      const { token, login } = res.data;
-      const result = { token, login };
-      localStorage.setItem('user', JSON.stringify(result));
+      localStorage.setItem('user', JSON.stringify(res.data));
+      setlocalToken(JSON.parse(localStorage.getItem('user')));
     }).catch(err => {
       switch (err.response.status) {
         case 400:
@@ -49,6 +49,10 @@ const RegForm = () => {
     });
 
     reset();
+  }
+
+  if (localToken) {
+    return <Navigate to='/main' />
   }
 
   return (

@@ -1,0 +1,45 @@
+.appointment_container {
+  margin: 25px;
+
+  .appointment_table {
+    width: 96%;
+
+    &_head {
+      background-color: #C4C4C4;
+      border-bottom: 1px solid #000;
+
+      &_row {
+        &_cell {
+          font-size: 18px;
+          text-align: center;
+        }
+      }
+    }
+
+    .appointment_table_body {
+      background-color: #fff;
+      border: 1px solid #000;
+
+      &_row {
+        width: 90%;
+        
+        &_cell {
+          border-left: 1px solid #000;
+          border-bottom: none;
+          font-size: 18px;
+          text-align: center;
+
+          img {
+            &:hover {
+              cursor: pointer;
+            }
+          }
+
+          img + img {
+            margin-left: 25px;
+          }
+        }
+      }
+    }
+  }
+}

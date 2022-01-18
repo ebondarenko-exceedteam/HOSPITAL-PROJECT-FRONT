@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Snackbars from '../../Snackbars/Snackbars';
 import './AuthForm.scss'
 
 const AuthForm = () => {
+  const [ localToken, setlocalToken ] = useState(false);
   const [ messages, setMessages ] = useState({
     open: false,
     message: ''
@@ -26,9 +27,8 @@ const AuthForm = () => {
       login: authFormLogin,
       password: authFormPassword
     }).then(res => {
-      const { token, login } = res.data;
-      const result = { token, login };
-      localStorage.setItem('user', JSON.stringify(result));
+      localStorage.setItem('token', res.data.token);
+      setlocalToken(localStorage.getItem('token'));
     }).catch(err => {
       switch (err.response.status) {
         case 404:
@@ -51,6 +51,10 @@ const AuthForm = () => {
           break;
       };
     });
+  }
+
+  if (localToken) {
+    return <Navigate to='/main' />
   }
 
   return (

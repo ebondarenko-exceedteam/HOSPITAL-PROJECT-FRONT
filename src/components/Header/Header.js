@@ -10,7 +10,9 @@ const Header = (props) => {
           src={headerLogo}
           alt='headerLogo'
         />
-        {props.children}
+        <div className='header_children'>
+          {props.children}
+        </div>
       </div>
     </header>
   )
