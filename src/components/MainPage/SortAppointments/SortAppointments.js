@@ -2,14 +2,24 @@ import React, { useState } from 'react';
 import { Box, MenuItem, Select } from '@mui/material';
 import './SortAppointments.scss';
 
-const Sort = () => {
-  const [sortValue, setSortValue] = useState('');
-  const [sortParams, setsortParams] = useState('asc');
+const SortAppointments = () => {
+  const [sortParams, setSortParams] = useState({
+    value: '',
+    param: ''
+  });
+
   const handleChangeValue = (event) => {
-    setSortValue(event.target.value);
+    setSortParams({
+      value: event.target.value,
+      param: 'asc'
+    });
   };
+
   const handleChangeParams = (event) => {
-    setsortParams(event.target.value);
+    setSortParams({
+      ...sortParams,
+      param: event.target.value
+    });
   };
 
   return (
@@ -18,7 +28,7 @@ const Sort = () => {
         <p>Сортировать по:</p>
         <Select
           className='sortAppointments_mainSelect_select'
-          value={sortValue}
+          value={sortParams.value}
           onChange={handleChangeValue}
         >
           <MenuItem value={'name'}>Имя</MenuItem>
@@ -27,11 +37,11 @@ const Sort = () => {
           <MenuItem value={'None'}>None</MenuItem>
         </Select>
       </Box>
-      {sortValue && <Box className='sortAppointments_secondSelect'>
+      {sortParams.param && <Box className='sortAppointments_secondSelect'>
         <p>Направление:</p>
         <Select
           className='sortAppointments_secondSelect_select'
-          value={sortParams}
+          value={sortParams.param}
           onChange={handleChangeParams}
         >
           <MenuItem value={'asc'}>По возрастанию</MenuItem>
@@ -43,4 +53,4 @@ const Sort = () => {
   )
 }
 
-export default Sort;
+export default SortAppointments;
