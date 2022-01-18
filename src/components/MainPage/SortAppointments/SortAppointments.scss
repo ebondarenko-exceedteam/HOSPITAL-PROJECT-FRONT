@@ -1,0 +1,25 @@
+.sortAppointments_wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.sortAppointments_mainSelect,
+.sortAppointments_secondSelect {
+  display: flex;
+  margin-top: 30px;
+  align-items: center;
+
+  p {
+    font-size: 18px;
+    margin: 0 20px;
+  }
+
+  &_select {
+    width: 200px;
+    height: 45px;
+    background-color: #fff;
+  }
+}
