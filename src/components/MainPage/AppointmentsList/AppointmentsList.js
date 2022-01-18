@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   TableContainer,
   Table,
@@ -12,8 +12,16 @@ import deleteLogo from '../../../source/images/delete.svg';
 import editLogo from '../../../source/images/edit.svg';
 import './AppointmentsList.scss';
 
-const AppointmentsList = ({ allAppointments, setAllAppointments }) => {
+const AppointmentsList = (props) => {
+  const { allAppointments, setAllAppointments, setIndex, setOpen } = props;
   const { token } = JSON.parse(localStorage.getItem('user'));
+  const [headItems, setHeadItems] = useState([
+    'Имя',
+    'Врач',
+    'Дата',
+    'Жалобы',
+    ''
+  ]);
 
   useEffect(() => {
     axios.get('http://localhost:8000/getAllAppointments', {
@@ -23,8 +31,9 @@ const AppointmentsList = ({ allAppointments, setAllAppointments }) => {
     }).then(res => setAllAppointments(res.data.data))
   }, [])
 
-  const editAppointment = () => {
-
+  const editAppointment = (index) => {
+    setIndex(index);
+    setOpen(true);
   }
 
   return (
@@ -32,18 +41,23 @@ const AppointmentsList = ({ allAppointments, setAllAppointments }) => {
       <Table className='appointment_table'>
         <TableHead className='appointment_table_head'>
           <TableRow className='appointment_table_head_row'>
-            <TableCell className='appointment_table_head_row_cell'>Имя</TableCell>
-            <TableCell className='appointment_table_head_row_cell'>Врач</TableCell>
-            <TableCell className='appointment_table_head_row_cell'>Дата</TableCell>
-            <TableCell className='appointment_table_head_row_cell'>Жалобы</TableCell>
-            <TableCell className='appointment_table_head_row_cell'></TableCell>
+            {
+              headItems.map((item, index) => (
+                <TableCell
+                  key={`headCell_${index}`}
+                  className='appointment_table_head_row_cell'
+                >
+                  {item}
+                </TableCell>
+              ))
+            }
           </TableRow>
         </TableHead>
         <TableBody className='appointment_table_body'>
           {
             allAppointments.map((item, index) => (
               <TableRow
-              className='appointment_table_body_row'
+                className='appointment_table_body_row'
                 key={`appointment_${index}`}
               >
                 <TableCell className='appointment_table_body_row_cell'>{item.name}</TableCell>
@@ -56,7 +70,7 @@ const AppointmentsList = ({ allAppointments, setAllAppointments }) => {
                     alt='deleteLogo'
                   />
                   <img
-                    onClick={editAppointment}
+                    onClick={() => editAppointment(index)}
                     src={editLogo}
                     alt='editLogo'
                   />

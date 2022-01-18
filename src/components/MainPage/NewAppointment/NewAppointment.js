@@ -1,19 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
-import moment from 'moment';
 import axios from 'axios';
 import './NewAppointment.scss';
 
-const NewAppointment = ({ setAllAppointments }) => {
-  const [doctors, setDoctors] = useState([
-    'Выберите врача',
-    'Иванов Андрей Евгеньевич',
-    'Фоменко Наталья Юрьевна',
-    'Кузнецова Марина Андреевна',
-    'Радищев Сергей Петрович'
-  ])
-  const today = moment().format('YYYY-MM-DD');
-  const { token, _id } = JSON.parse(localStorage.getItem('user'));
+const NewAppointment = ({ setAllAppointments, doctors, today }) => {
+  const { token } = JSON.parse(localStorage.getItem('user'));
   const {
     register,
     formState: {
@@ -36,7 +27,6 @@ const NewAppointment = ({ setAllAppointments }) => {
     axios.post(
       'http://localhost:8000/createNewAppointment',
       {
-        userId: _id,
         name: appointmentName,
         doctor: appointmentDoctor,
         date: appointmentDate,
