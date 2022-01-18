@@ -6,6 +6,7 @@ import NewAppointment from './NewAppointment/NewAppointment';
 import AppointmentsList from './AppointmentsList/AppointmentsList';
 import EditPopup from './EditPopup/EditPopup';
 // import DeletePopup from './DeletePopup/DeletePopup';
+// import Sort from './Sort/Sort';
 import './MainPage.scss';
 
 const MainPage = () => {
@@ -33,6 +34,7 @@ const MainPage = () => {
         doctors={doctors}
         today={today}
       />
+      {/* <Sort /> */}
       <AppointmentsList
         allAppointments={allAppointments}
         setAllAppointments={setAllAppointments}

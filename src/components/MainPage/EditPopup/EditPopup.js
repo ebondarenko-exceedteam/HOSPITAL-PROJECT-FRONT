@@ -132,13 +132,13 @@ const EditPopup = (props) => {
               <div className='editPopup_form_buttonBlock_wrapper'>
                 <button
                   className='editPopup_form_buttonBlock_cancel'
-                  onClick={handleClose}
+                  onClick={() => handleClose}
                 >
                   Cancel
                 </button>
                 <button
                   className='editPopup_form_buttonBlock_save'
-                  onClick={handleSubmit}
+                  onClick={() => handleSubmit}
                 >
                   Save
                 </button>
