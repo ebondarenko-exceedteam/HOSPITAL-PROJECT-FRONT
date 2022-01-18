@@ -5,7 +5,7 @@ import Header from '../Header/Header';
 import NewAppointment from './NewAppointment/NewAppointment';
 import AppointmentsList from './AppointmentsList/AppointmentsList';
 import EditPopup from './EditPopup/EditPopup';
-// import DeletePopup from './DeletePopup/DeletePopup';
+import DeletePopup from './DeletePopup/DeletePopup';
 // import Sort from './Sort/Sort';
 import './MainPage.scss';
 
@@ -50,14 +50,14 @@ const MainPage = () => {
         appointment={allAppointments[index]}
         setAllAppointments={setAllAppointments}
       />}
-      {/* {openDelete && <DeletePopup
+      {openDelete && <DeletePopup
         open={openDelete}
         setOpen={setOpenDelete}
         today={today}
         doctors={doctors}
         _id={allAppointments[index]._id}
         setAllAppointments={setAllAppointments}
-      />} */}
+      />}
     </div>
   )
 }
