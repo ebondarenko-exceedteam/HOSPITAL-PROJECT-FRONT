@@ -4,7 +4,7 @@ import moment from 'moment';
 import Header from '../Header/Header';
 import NewAppointment from './NewAppointment/NewAppointment';
 import AppointmentsList from './AppointmentsList/AppointmentsList';
-// import EditPopup from './EditPopup/EditPopup';
+import EditPopup from './EditPopup/EditPopup';
 // import DeletePopup from './DeletePopup/DeletePopup';
 import './MainPage.scss';
 
@@ -40,7 +40,7 @@ const MainPage = () => {
         setOpenEdit={setOpenEdit}
         setOpenDelete={setOpenDelete}
       />
-      {/* {openEdit && <EditPopup
+      {openEdit && <EditPopup
         open={openEdit}
         setOpen={setOpenEdit}
         today={today}
@@ -48,7 +48,7 @@ const MainPage = () => {
         appointment={allAppointments[index]}
         setAllAppointments={setAllAppointments}
       />}
-      {openDelete && <DeletePopup
+      {/* {openDelete && <DeletePopup
         open={openDelete}
         setOpen={setOpenDelete}
         today={today}
