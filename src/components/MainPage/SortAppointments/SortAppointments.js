@@ -3,26 +3,39 @@ import { Box, MenuItem, Select } from '@mui/material';
 import './SortAppointments.scss';
 
 const SortAppointments = ({ allAppointments, setAllAppointments }) => {
-  const [ sortParams, setSortParams ] = useState({
+  const [sortParams, setSortParams] = useState({
     value: '',
     param: ''
   });
   const { value, param } = sortParams;
 
   const sortFunc = (field, direction) => {
-    allAppointments.sort((a, b) => b[field] > a[field] ? -1 : b[field] < a[field] ? 1 : 0);
-    if (direction === 'desc') allAppointments.reverse();
-    setAllAppointments([...allAppointments]);
-  }
+    if (field === 'None') {
+      allAppointments.sort((a, b) => b._id > a._id ? -1 : b._id < a._id ? 1 : 0);
+      setAllAppointments([...allAppointments]);
+    } else {
+      allAppointments.sort((a, b) => b[field] > a[field] ? -1 : b[field] < a[field] ? 1 : 0);
+      if (direction === 'desc') allAppointments.reverse();
+      setAllAppointments([...allAppointments]);
+    }
+  };
 
   const handleChangeValue = (event) => {
     const value = event.target.value;
     const param = 'asc';
-    setSortParams({
-      value,
-      param
-    });
-    sortFunc(value, param);
+    if (value === 'None') {
+      setSortParams({
+        value,
+        param: ''
+      });
+      sortFunc(value, param);
+    } else {
+      setSortParams({
+        value,
+        param
+      });
+      sortFunc(value, param);
+    }
   };
 
   const handleChangeParams = (event) => {
