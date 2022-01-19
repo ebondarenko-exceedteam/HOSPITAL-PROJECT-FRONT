@@ -8,35 +8,51 @@ const SortAppointments = ({ allAppointments, setAllAppointments }) => {
     param: ''
   });
   const { value, param } = sortParams;
+  const [ fieldItem, setFieldItem ] = useState([
+    {
+      value: 'name',
+      description: 'Имя'
+    },
+    {
+      value: 'doctor',
+      description: 'Врач'
+    },
+    {
+      value: 'date',
+      description: 'Дата'
+    },
+    {
+      value: 'None',
+      description: 'None'
+    }
+  ]);
+  const [ directionItem, setDirectoinItem ] = useState([
+    {
+      value: 'asc',
+      description: 'По возрастанию'
+    },
+    {
+      value: 'desc',
+      description: 'По убыванию'
+    }
+  ]);
 
   const sortFunc = (field, direction) => {
-    if (field === 'None') {
-      allAppointments.sort((a, b) => b._id > a._id ? -1 : b._id < a._id ? 1 : 0);
-      setAllAppointments([...allAppointments]);
-    } else {
-      allAppointments.sort((a, b) => b[field] > a[field] ? -1 : b[field] < a[field] ? 1 : 0);
-      if (direction === 'desc') allAppointments.reverse();
-      setAllAppointments([...allAppointments]);
-    }
+    if (field === 'None') field = '_id';
+    allAppointments.sort((a, b) => b[field] > a[field] ? -1 : b[field] < a[field] ? 1 : 0);
+    if (direction === 'desc') allAppointments.reverse();
+    setAllAppointments([...allAppointments]);
   };
 
   const handleChangeValue = (event) => {
     const value = event.target.value;
     const param = 'asc';
-    if (value === 'None') {
-      setSortParams({
-        value,
-        param: ''
-      });
-      sortFunc(value, param);
-    } else {
-      setSortParams({
-        value,
-        param
-      });
-      sortFunc(value, param);
-    }
-  };
+    setSortParams({
+      value,
+      param
+    });
+    sortFunc(value, param);
+};
 
   const handleChangeParams = (event) => {
     const param = event.target.value;
@@ -58,21 +74,33 @@ const SortAppointments = ({ allAppointments, setAllAppointments }) => {
           value={value}
           onChange={(e) => handleChangeValue(e)}
         >
-          <MenuItem value={'name'}>Имя</MenuItem>
-          <MenuItem value={'doctor'}>Врач</MenuItem>
-          <MenuItem value={'date'}>Дата</MenuItem>
-          <MenuItem value={'None'}>None</MenuItem>
+          {
+            fieldItem.map(({ value, description }, index) => (
+            <MenuItem
+              key={`field_${index}`}
+              value={value}>
+                {description}
+            </MenuItem>
+            ))
+          }
         </Select>
       </Box>
-      {param && <Box className='sortAppointments_secondSelect'>
+      {value !== 'None' && <Box className='sortAppointments_secondSelect'>
         <p>Направление:</p>
         <Select
           className='sortAppointments_secondSelect_select'
           value={param}
           onChange={(e) => handleChangeParams(e)}
         >
-          <MenuItem value={'asc'}>По возрастанию</MenuItem>
-          <MenuItem value={'desc'}>По убыванию</MenuItem>
+          {
+            directionItem.map(({ value, description }, index) => (
+            <MenuItem
+              key={`field_${index}`}
+              value={value}>
+                {description}
+            </MenuItem>
+            ))
+          }
         </Select>
       </Box>}
     </div>

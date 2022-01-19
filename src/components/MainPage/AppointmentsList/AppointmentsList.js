@@ -22,6 +22,7 @@ const AppointmentsList = (props) => {
     'Жалобы',
     ''
   ]);
+
   useEffect(() => {
     axios.get('http://localhost:8000/getAllAppointments', {
       headers: {
