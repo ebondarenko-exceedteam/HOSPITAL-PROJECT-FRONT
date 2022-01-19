@@ -2,24 +2,38 @@ import React, { useState } from 'react';
 import { Box, MenuItem, Select } from '@mui/material';
 import './SortAppointments.scss';
 
-const SortAppointments = () => {
-  const [sortParams, setSortParams] = useState({
+const SortAppointments = ({ allAppointments, setAllAppointments }) => {
+  const [ sortParams, setSortParams ] = useState({
     value: '',
     param: ''
   });
+  const { value, param } = sortParams;
+
+  const sortFunc = (field, direction) => {
+    allAppointments.sort((a, b) => b[field] > a[field] ? -1 : b[field] < a[field] ? 1 : 0);
+    if (direction === 'desc') allAppointments.reverse();
+    setAllAppointments([...allAppointments]);
+  }
 
   const handleChangeValue = (event) => {
+    const value = event.target.value;
+    const param = 'asc';
     setSortParams({
-      value: event.target.value,
-      param: 'asc'
+      value,
+      param
     });
+    sortFunc(value, param);
   };
 
   const handleChangeParams = (event) => {
-    setSortParams({
-      ...sortParams,
-      param: event.target.value
+    const param = event.target.value;
+    setSortParams(prev => {
+      return {
+        ...prev,
+        param
+      }
     });
+    sortFunc(value, param);
   };
 
   return (
@@ -28,8 +42,8 @@ const SortAppointments = () => {
         <p>Сортировать по:</p>
         <Select
           className='sortAppointments_mainSelect_select'
-          value={sortParams.value}
-          onChange={handleChangeValue}
+          value={value}
+          onChange={(e) => handleChangeValue(e)}
         >
           <MenuItem value={'name'}>Имя</MenuItem>
           <MenuItem value={'doctor'}>Врач</MenuItem>
@@ -37,12 +51,12 @@ const SortAppointments = () => {
           <MenuItem value={'None'}>None</MenuItem>
         </Select>
       </Box>
-      {sortParams.param && <Box className='sortAppointments_secondSelect'>
+      {param && <Box className='sortAppointments_secondSelect'>
         <p>Направление:</p>
         <Select
           className='sortAppointments_secondSelect_select'
-          value={sortParams.param}
-          onChange={handleChangeParams}
+          value={param}
+          onChange={(e) => handleChangeParams(e)}
         >
           <MenuItem value={'asc'}>По возрастанию</MenuItem>
           <MenuItem value={'desc'}>По убыванию</MenuItem>

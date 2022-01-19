@@ -34,7 +34,10 @@ const MainPage = () => {
         doctors={doctors}
         today={today}
       />
-      <SortAppointments />
+      <SortAppointments
+        allAppointments={allAppointments}
+        setAllAppointments={setAllAppointments}
+      />
       <AppointmentsList
         allAppointments={allAppointments}
         setAllAppointments={setAllAppointments}
@@ -45,7 +48,6 @@ const MainPage = () => {
       {openEdit && <EditPopup
         open={openEdit}
         setOpen={setOpenEdit}
-        today={today}
         doctors={doctors}
         appointment={allAppointments[index]}
         setAllAppointments={setAllAppointments}

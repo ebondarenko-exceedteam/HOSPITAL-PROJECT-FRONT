@@ -5,7 +5,7 @@ import { Box, Modal } from '@mui/material';
 import './EditPopup.scss'
 
 const EditPopup = (props) => {
-  const { doctors, open, setOpen, today, appointment, setAllAppointments } = props;
+  const { doctors, open, setOpen, appointment, setAllAppointments } = props;
   const { _id, date, doctor, name, complaint } = appointment;
   const token = localStorage.getItem('token');
   const handleClose = () => setOpen(false);
@@ -64,7 +64,7 @@ const EditPopup = (props) => {
                 {...register('editPopupName', {
                   required: 'Введите ФИО',
                   pattern: {
-                    value: /^[a-zA-Zа-яА-Я]+$/,
+                    value: /^[a-zA-Zа-яА-Я\s]+$/,
                     message: 'Только русские или латинские буквы'
                   },
                   value: name,
@@ -102,11 +102,11 @@ const EditPopup = (props) => {
               <label>Дата:</label>
               <input
                 type='date'
-                min={today}
+                min={date}
                 {...register('editPopupDate', {
                   required: 'Выберите дату приёма',
                   min: {
-                    value: today,
+                    value: date,
                     message: 'Нельзя выбрать прошедшую дату'
                   },
                   value: date

@@ -50,7 +50,7 @@ const NewAppointment = ({ setAllAppointments, doctors, today }) => {
             {...register('appointmentName', {
               required: 'Введите ФИО',
               pattern: {
-                value: /^[a-zA-Zа-яА-Я]+$/,
+                value: /^[a-zA-Zа-яА-Я\s]+$/,
                 message: 'Только русские или латинские буквы'
               }
             })}

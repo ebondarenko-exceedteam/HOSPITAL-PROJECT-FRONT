@@ -41,13 +41,13 @@ const deletePopup = (props) => {
             <div className='deletePopup_buttonBlock_wrapper'>
               <button
                 className='deletePopup_buttonBlock_cancel'
-                onClick={() => handleClose}
+                onClick={() => handleClose()}
               >
                 Cancel
               </button>
               <button
                 className='deletePopup_buttonBlock_save'
-                onClick={() => deleteAppointment}
+                onClick={() => deleteAppointment()}
               >
                 Delete
               </button>
