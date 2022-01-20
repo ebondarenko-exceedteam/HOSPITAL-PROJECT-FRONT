@@ -80,15 +80,13 @@ const SortAppointments = ({ allAppointments, setAllAppointments }) => {
   };
 
   const filterFunc = () => {
-    if (dateValueFrom === null && dateValueTo === null) {
-      setAllAppointments(allAppointments);
-    } else if (dateValueFrom === null && dateValueTo) {
-      setAllAppointments(allAppointments.filter(item => item.date <= dateValueTo));
-    } else if (dateValueTo === null && dateValueFrom) {
-      setAllAppointments(allAppointments.filter(item => item.date >= dateValueFrom));
-    } else {
-      setAllAppointments(allAppointments.filter(item => item.date >= dateValueFrom && item.date <= dateValueTo));
-    }
+    if (dateValueFrom === null && dateValueTo === null) return setAllAppointments([...allAppointments]);;
+    const filterData = allAppointments.filter(item => {
+     if (dateValueFrom === null && dateValueTo) return item.date <= dateValueTo;
+     if (dateValueTo === null && dateValueFrom) return item.date >= dateValueFrom;
+     return item.date >= dateValueFrom && item.date <= dateValueTo
+    });
+    setAllAppointments([...filterData]);
   };
 
   const deleteFilter = () => {
