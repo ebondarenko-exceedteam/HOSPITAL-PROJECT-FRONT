@@ -17,35 +17,35 @@ const SortAppointments = ({ allAppointments, setAllAppointments }) => {
   const { value, param } = sortParams;
   const [fieldItem, setFieldItem] = useState([
     {
+      value: '',
+      label: ''
+    },
+    {
       value: 'name',
-      description: 'Имя'
+      label: 'Имя'
     },
     {
       value: 'doctor',
-      description: 'Врач'
+      label: 'Врач'
     },
     {
       value: 'date',
-      description: 'Дата'
-    },
-    {
-      value: 'None',
-      description: 'None'
+      label: 'Дата'
     }
   ]);
   const [directionItem, setDirectoinItem] = useState([
     {
       value: 'asc',
-      description: 'По возрастанию'
+      label: 'По возрастанию'
     },
     {
       value: 'desc',
-      description: 'По убыванию'
+      label: 'По убыванию'
     }
   ]);
   const [filterFlag, setFilterFlag] = useState(false);
-  const [dateValueFrom, setDateValueFrom] = useState();
-  const [dateValueTo, setDateValueTo] = useState();
+  const [dateValueFrom, setDateValueFrom] = useState(null);
+  const [dateValueTo, setDateValueTo] = useState(null);
 
   const sortFunc = (field, direction) => {
     if (field === 'None') field = '_id';
@@ -80,7 +80,15 @@ const SortAppointments = ({ allAppointments, setAllAppointments }) => {
   };
 
   const filterFunc = () => {
-    setAllAppointments(allAppointments.filter(item => item.date >= dateValueFrom && item.date <= dateValueTo));
+    if (dateValueFrom === null && dateValueTo === null) {
+      setAllAppointments(allAppointments);
+    } else if (dateValueFrom === null && dateValueTo) {
+      setAllAppointments(allAppointments.filter(item => item.date <= dateValueTo));
+    } else if (dateValueTo === null && dateValueFrom) {
+      setAllAppointments(allAppointments.filter(item => item.date >= dateValueFrom));
+    } else {
+      setAllAppointments(allAppointments.filter(item => item.date >= dateValueFrom && item.date <= dateValueTo));
+    }
   };
 
   const deleteFilter = () => {
@@ -89,6 +97,8 @@ const SortAppointments = ({ allAppointments, setAllAppointments }) => {
         'Authorization': token
       }
     }).then(res => setAllAppointments(res.data.data))
+    setDateValueFrom(null);
+    setDateValueTo(null);
   }
 
   return (
@@ -102,17 +112,17 @@ const SortAppointments = ({ allAppointments, setAllAppointments }) => {
             onChange={(e) => handleChangeValue(e)}
           >
             {
-              fieldItem.map(({ value, description }, index) => (
+              fieldItem.map(({ value, label }, index) => (
                 <MenuItem
                   key={`field_${index}`}
                   value={value}>
-                  {description}
+                  {label}
                 </MenuItem>
               ))
             }
           </Select>
         </Box>
-        {value === 'None' || value !== '' && <Box className='sortAppointments_secondSelect'>
+        {value && <Box className='sortAppointments_secondSelect'>
           <p>Направление:</p>
           <Select
             className='sortAppointments_secondSelect_select'
@@ -120,11 +130,11 @@ const SortAppointments = ({ allAppointments, setAllAppointments }) => {
             onChange={(e) => handleChangeParams(e)}
           >
             {
-              directionItem.map(({ value, description }, index) => (
+              directionItem.map(({ value, label }, index) => (
                 <MenuItem
                   key={`field_${index}`}
                   value={value}>
-                  {description}
+                  {label}
                 </MenuItem>
               ))
             }
@@ -146,7 +156,8 @@ const SortAppointments = ({ allAppointments, setAllAppointments }) => {
             dateAdapter={AdapterDateFns}
           >
             <DatePicker
-              className='filterBlock_datePicker_input'
+              className='datepicker'
+              label=' '
               value={dateValueFrom}
               onChange={(newValue) => setDateValueFrom(moment(newValue).format('YYYY-MM-DD'))}
               renderInput={(params) => (
@@ -161,7 +172,8 @@ const SortAppointments = ({ allAppointments, setAllAppointments }) => {
             dateAdapter={AdapterDateFns}
           >
             <DatePicker
-              className='filterBlock_datePicker_input'
+              className='datepicker'
+              label=' '
               value={dateValueTo}
               onChange={(newValue) => setDateValueTo(moment(newValue).format('YYYY-MM-DD'))}
               renderInput={(params) => (
