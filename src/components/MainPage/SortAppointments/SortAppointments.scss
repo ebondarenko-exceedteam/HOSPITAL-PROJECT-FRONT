@@ -1,25 +1,81 @@
 .sortAppointments_wrapper {
   display: flex;
+  flex-direction: column;
+  // justify-content: flex-end;
+  // align-items: center;
+  // width: 90%;
+  // margin: 0 auto;
+}
+
+p {
+  font-size: 18px;
+  margin: 0 20px;
+}
+
+img {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.sortBlock {
+  display: flex;
   justify-content: flex-end;
   align-items: center;
   width: 90%;
   margin: 0 auto;
+
+  .sortAppointments_mainSelect,
+  .sortAppointments_secondSelect,
+  .sortAppointments_filter {
+    display: flex;
+    margin-top: 30px;
+    align-items: center;
+
+    &_select {
+      width: 200px;
+      height: 45px;
+      background-color: #fff;
+    }
+  }
 }
 
-.sortAppointments_mainSelect,
-.sortAppointments_secondSelect {
+.filterBlock {
   display: flex;
-  margin-top: 30px;
+  justify-content: flex-end;
   align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 30px;
 
-  p {
-    font-size: 18px;
-    margin: 0 20px;
+  &_datePicker {
+    display: flex;
+    align-items: center;
+
+    &_input {
+      width: 250px;
+      height: 100%;
+      max-height: 45px;
+      background-color: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.25);
+      border-radius: 4px;
+    }
   }
 
-  &_select {
-    width: 200px;
+  &_button {
     height: 45px;
     background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    margin: 0 40px;
+    width: 200px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
