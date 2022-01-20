@@ -27,8 +27,6 @@ const deletePopup = (props) => {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
       >
         <Box className='deletePopup_wrapper'>
           <div className='deletePopup_header'>
