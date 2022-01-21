@@ -50,8 +50,6 @@ const EditPopup = (props) => {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
       >
         <Box className='editPopup_form_wrapper'>
           <div className='editPopup_form_header'>

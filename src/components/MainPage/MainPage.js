@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import moment from 'moment';
 import Header from '../Header/Header';
 import NewAppointment from './NewAppointment/NewAppointment';
@@ -22,12 +22,22 @@ const MainPage = () => {
     'Радищев Сергей Петрович'
   ]);
   const today = moment().format('YYYY-MM-DD');
+  const navigate = useNavigate();
+
+  const closePage = () => {
+    localStorage.clear();
+    navigate('/authorization');
+  }
 
   return (
     <div className='mainPage'>
       <Header>
         <p>Приёмы</p>
-        <Link to='/authorization' className='button'>Выход</Link>
+        <button
+          onClick={() => closePage()}
+        >
+          Выход
+        </button>
       </Header>
       <NewAppointment
         setAllAppointments={setAllAppointments}

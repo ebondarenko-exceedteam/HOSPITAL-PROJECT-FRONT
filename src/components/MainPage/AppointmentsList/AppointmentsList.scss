@@ -1,8 +1,10 @@
-.appointment_container {
-  margin: 25px;
+.MuiTableContainer-root {
+  margin-top: 25px;
+  width: 90%;
 
   .appointment_table {
-    width: 96%;
+    width: 90%;
+    margin: auto;
 
     &_head {
       background-color: #C4C4C4;
