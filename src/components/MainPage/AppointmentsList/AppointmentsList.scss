@@ -1,10 +1,17 @@
+.MuiTableHead-root {
+  background-color: #C4C4C4;
+  border-bottom: 1px solid #000;
+}
+
 .MuiTableContainer-root {
-  margin-top: 25px;
+  margin: 25px 0 20px;
   width: 90%;
 
   .appointment_table {
     width: 90%;
     margin: auto;
+    height: 60vh;
+    overflow: auto;
 
     &_head {
       background-color: #C4C4C4;

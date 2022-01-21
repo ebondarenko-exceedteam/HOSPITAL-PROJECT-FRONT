@@ -82,9 +82,9 @@ const SortAppointments = ({ allAppointments, setAllAppointments }) => {
   const filterFunc = () => {
     if (dateValueFrom === null && dateValueTo === null) return setAllAppointments([...allAppointments]);;
     const filterData = allAppointments.filter(item => {
-     if (dateValueFrom === null && dateValueTo) return item.date <= dateValueTo;
-     if (dateValueTo === null && dateValueFrom) return item.date >= dateValueFrom;
-     return item.date >= dateValueFrom && item.date <= dateValueTo
+      if (dateValueFrom === null && dateValueTo) return item.date <= dateValueTo;
+      if (dateValueTo === null && dateValueFrom) return item.date >= dateValueFrom;
+      return item.date >= dateValueFrom && item.date <= dateValueTo
     });
     setAllAppointments([...filterData]);
   };
@@ -180,17 +180,19 @@ const SortAppointments = ({ allAppointments, setAllAppointments }) => {
             />
           </LocalizationProvider>
         </Box>
-        <button
-          onClick={() => filterFunc()}
-          className='filterBlock_button'
-        >
-          Фильтровать
-        </button>
-        <img
-          onClick={() => deleteFilter()}
-          src={close_filter}
-          alt='close_filter'
-        />
+        <div className='filterBlock_buttons'>
+          <button
+            onClick={() => filterFunc()}
+            className='filterBlock_button'
+          >
+            Фильтровать
+          </button>
+          <img
+            onClick={() => deleteFilter()}
+            src={close_filter}
+            alt='close_filter'
+          />
+        </div>
       </div>}
     </div>
 
