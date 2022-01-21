@@ -8,7 +8,7 @@ import open_filter from '../../../source/images/open_filter.svg';
 import close_filter from '../../../source/images/close_filter.svg';
 import './SortAppointments.scss';
 
-const SortAppointments = ({ allAppointments, setAllAppointments }) => {
+const SortAppointments = ({ allAppointments, setAllAppointments, openFilter }) => {
   const token = localStorage.getItem('token');
   const [sortParams, setSortParams] = useState({
     value: '',
@@ -100,7 +100,8 @@ const SortAppointments = ({ allAppointments, setAllAppointments }) => {
   }
 
   return (
-    <div className='sortAppointments_wrapper'>
+    <>
+    {openFilter && <div className='sortAppointments_wrapper'>
       <div className='sortBlock'>
         <Box className='sortAppointments_mainSelect'>
           <p>Сортировать по:</p>
@@ -194,8 +195,8 @@ const SortAppointments = ({ allAppointments, setAllAppointments }) => {
           />
         </div>
       </div>}
-    </div>
-
+    </div>}
+    </>
   )
 }
 

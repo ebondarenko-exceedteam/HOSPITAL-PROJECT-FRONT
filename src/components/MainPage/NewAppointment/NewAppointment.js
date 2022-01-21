@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import './NewAppointment.scss';
 
-const NewAppointment = ({ setAllAppointments, doctors, today }) => {
+const NewAppointment = ({ setAllAppointments, doctors, today, openForm }) => {
   const token = localStorage.getItem('token');
   const {
     register,
@@ -42,7 +42,8 @@ const NewAppointment = ({ setAllAppointments, doctors, today }) => {
   }
 
   return (
-    <div className='newAppointment'>
+    <>
+    {openForm && <div className='newAppointment'>
       <form className='appointments_form' onSubmit={handleSubmit(handlerSubmit)}>
         <div className='appointments_form_item'>
           <label>Имя:</label>
@@ -112,7 +113,8 @@ const NewAppointment = ({ setAllAppointments, doctors, today }) => {
         </div>
         <button>Добавить</button>
       </form>
-    </div>
+    </div>}
+    </>
   )
 }
 

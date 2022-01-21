@@ -117,3 +117,31 @@ img {
     }
   }
 }
+
+@media (max-width: 420px) {
+  .sortAppointments_wrapper {
+    display: none;
+  }
+
+  .sortBlock {
+    align-items: center;
+
+    .sortAppointments_mainSelect,
+    .sortAppointments_secondSelect {
+      flex-direction: column;
+
+      p {
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  .filterBlock {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 30px;
+  }
+}

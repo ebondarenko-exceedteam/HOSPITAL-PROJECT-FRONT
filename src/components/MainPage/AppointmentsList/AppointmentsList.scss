@@ -1,22 +1,23 @@
-.MuiTableHead-root {
-  background-color: #C4C4C4;
-  border-bottom: 1px solid #000;
-}
-
 .MuiTableContainer-root {
   margin: 25px 0 20px;
-  width: 90%;
+  width: 100%;
+  max-height: 65vh;
+  overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
 
   .appointment_table {
     width: 90%;
     margin: auto;
-    height: 60vh;
-    overflow: auto;
-
+  
     &_head {
-      background-color: #C4C4C4;
-      border-bottom: 1px solid #000;
-
+      th {
+        background-color: #c4c4c4;
+        border-bottom: 1px solid #000;
+      }
+  
       &_row {
         &_cell {
           font-size: 18px;
@@ -24,26 +25,27 @@
         }
       }
     }
-
+  
     .appointment_table_body {
       background-color: #fff;
       border: 1px solid #000;
-
+  
       &_row {
         width: 90%;
-        
+  
         &_cell {
           border-left: 1px solid #000;
+          border-right: 1px solid #000;
           border-bottom: none;
           font-size: 18px;
           text-align: center;
-
+  
           img {
             &:hover {
               cursor: pointer;
             }
           }
-
+  
           img + img {
             margin-left: 25px;
           }
@@ -52,3 +54,5 @@
     }
   }
 }
+
+
