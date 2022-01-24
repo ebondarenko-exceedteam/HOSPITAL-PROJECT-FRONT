@@ -43,7 +43,7 @@ const AppointmentsList = (props) => {
 
   return (
     <TableContainer className='appointment_container'>
-      <Table className='appointment_table'>
+      <Table stickyHeader className='appointment_table'>
         <TableHead className='appointment_table_head'>
           <TableRow className='appointment_table_head_row'>
             {

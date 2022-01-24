@@ -1,0 +1,18 @@
+.toggle_icons {
+  width: 55%;
+  display: none;
+  margin: 20px auto;
+  justify-content: space-between;
+
+
+  &_form,
+  &_filter {
+    width: 50px;
+  }
+}
+
+@media (max-width: 700px) {
+  .toggle_icons {
+    display: flex;
+  }
+}

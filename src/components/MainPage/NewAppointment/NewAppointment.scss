@@ -1,7 +1,7 @@
 .newAppointment {
   padding: 20px 40px;
   display: flex;
-  background-color: #C5E9FF;
+  background-color: #c5e9ff;
   align-items: center;
   box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.25);
   margin-top: 10px;
@@ -11,7 +11,7 @@
     width: 100%;
     justify-content: space-between;
     align-items: flex-end;
-  }    
+  }
 
   .appointments_form_item {
     display: flex;
@@ -19,7 +19,9 @@
     align-items: flex-start;
     width: 18%;
 
-    input, select, textarea {
+    input,
+    select,
+    textarea {
       margin: 0;
       padding: 0;
       width: 100%;
@@ -29,6 +31,11 @@
       border-radius: 4px;
       background-color: #fff;
       border: 1px solid rgba(0, 0, 0, 0.25);
+    }
+
+    select {
+      width: 106%;
+      height: 47px;
     }
 
     textarea {
@@ -44,7 +51,7 @@
   }
 
   button {
-    height: 45px;
+    height: 47px;
     background-color: #fff;
     border-radius: 4px;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -53,7 +60,7 @@
     font-weight: 300;
     font-size: 18px;
     line-height: 21px;
-    margin-bottom: 20px;
+    margin-bottom: 23px;
     width: 20%;
   }
 
@@ -64,5 +71,31 @@
   p {
     color: red;
     font-size: 18px;
+  }
+}
+
+@media (max-width: 1150px) {
+  .newAppointment {
+    .appointments_form {
+      flex-direction: column;
+      align-items: center;
+
+      &_item {
+        width: 90%;
+
+        select {
+          width: 101%;
+        }
+
+        textarea {
+          max-width: 100%;
+          font-size: 15px;
+        }
+      }
+    }
+
+    button {
+      width: 200px;
+    }
   }
 }
