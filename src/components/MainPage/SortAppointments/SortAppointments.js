@@ -84,7 +84,7 @@ const SortAppointments = ({ allAppointments, setAllAppointments, openFilter }) =
     const filterData = allAppointments.filter(item => {
       if (dateValueFrom === null && dateValueTo) return item.date <= dateValueTo;
       if (dateValueTo === null && dateValueFrom) return item.date >= dateValueFrom;
-      return item.date >= dateValueFrom && item.date <= dateValueTo
+      return item.date >= dateValueFrom && item.date <= dateValueTo;
     });
     setAllAppointments([...filterData]);
   };
@@ -101,101 +101,101 @@ const SortAppointments = ({ allAppointments, setAllAppointments, openFilter }) =
 
   return (
     <>
-    {openFilter && <div className='sortAppointments_wrapper'>
-      <div className='sortBlock'>
-        <Box className='sortAppointments_mainSelect'>
-          <p>Сортировать по:</p>
-          <Select
-            className='sortAppointments_mainSelect_select'
-            value={value}
-            onChange={(e) => handleChangeValue(e)}
-          >
-            {
-              fieldItem.map(({ value, label }, index) => (
-                <MenuItem
-                  key={`field_${index}`}
-                  value={value}>
-                  {label}
-                </MenuItem>
-              ))
-            }
-          </Select>
-        </Box>
-        {value && <Box className='sortAppointments_secondSelect'>
-          <p>Направление:</p>
-          <Select
-            className='sortAppointments_secondSelect_select'
-            value={param}
-            onChange={(e) => handleChangeParams(e)}
-          >
-            {
-              directionItem.map(({ value, label }, index) => (
-                <MenuItem
-                  key={`field_${index}`}
-                  value={value}>
-                  {label}
-                </MenuItem>
-              ))
-            }
-          </Select>
-        </Box>}
-        <Box className='sortAppointments_filter'>
-          <p>Добавить фильтр по дате:</p>
-          <img
-            onClick={() => openFilterBlock()}
-            src={open_filter}
-            alt='open_filter'
-          />
-        </Box>
-      </div>
-      {filterFlag && <div className='filterBlock'>
-        <Box className='filterBlock_datePicker'>
-          <p>c:</p>
-          <LocalizationProvider
-            dateAdapter={AdapterDateFns}
-          >
-            <DatePicker
-              className='datepicker'
-              label=' '
-              value={dateValueFrom}
-              onChange={(newValue) => setDateValueFrom(moment(newValue).format('YYYY-MM-DD'))}
-              renderInput={(params) => (
-                <TextField {...params} />
-              )}
+      {openFilter && <div className='sortAppointments_wrapper'>
+        <div className='sortBlock'>
+          <Box className='sortAppointments_mainSelect'>
+            <p>Сортировать по:</p>
+            <Select
+              className='sortAppointments_mainSelect_select'
+              value={value}
+              onChange={(e) => handleChangeValue(e)}
+            >
+              {
+                fieldItem.map(({ value, label }, index) => (
+                  <MenuItem
+                    key={`field_${index}`}
+                    value={value}>
+                    {label}
+                  </MenuItem>
+                ))
+              }
+            </Select>
+          </Box>
+          {value && <Box className='sortAppointments_secondSelect'>
+            <p>Направление:</p>
+            <Select
+              className='sortAppointments_secondSelect_select'
+              value={param}
+              onChange={(e) => handleChangeParams(e)}
+            >
+              {
+                directionItem.map(({ value, label }, index) => (
+                  <MenuItem
+                    key={`field_${index}`}
+                    value={value}>
+                    {label}
+                  </MenuItem>
+                ))
+              }
+            </Select>
+          </Box>}
+          <Box className='sortAppointments_filter'>
+            <p>Добавить фильтр по дате:</p>
+            <img
+              onClick={() => openFilterBlock()}
+              src={open_filter}
+              alt='open_filter'
             />
-          </LocalizationProvider>
-        </Box>
-        <Box className='filterBlock_datePicker'>
-          <p>по:</p>
-          <LocalizationProvider
-            dateAdapter={AdapterDateFns}
-          >
-            <DatePicker
-              className='datepicker'
-              label=' '
-              value={dateValueTo}
-              onChange={(newValue) => setDateValueTo(moment(newValue).format('YYYY-MM-DD'))}
-              renderInput={(params) => (
-                <TextField {...params} />
-              )}
-            />
-          </LocalizationProvider>
-        </Box>
-        <div className='filterBlock_buttons'>
-          <button
-            onClick={() => filterFunc()}
-            className='filterBlock_button'
-          >
-            Фильтровать
-          </button>
-          <img
-            onClick={() => deleteFilter()}
-            src={close_filter}
-            alt='close_filter'
-          />
+          </Box>
         </div>
+        {filterFlag && <div className='filterBlock'>
+          <Box className='filterBlock_datePicker'>
+            <p>c:</p>
+            <LocalizationProvider
+              dateAdapter={AdapterDateFns}
+            >
+              <DatePicker
+                className='datepicker'
+                label=' '
+                value={dateValueFrom}
+                onChange={(newValue) => setDateValueFrom(moment(newValue).format('YYYY-MM-DD'))}
+                renderInput={(params) => (
+                  <TextField {...params} />
+                )}
+              />
+            </LocalizationProvider>
+          </Box>
+          <Box className='filterBlock_datePicker'>
+            <p>по:</p>
+            <LocalizationProvider
+              dateAdapter={AdapterDateFns}
+            >
+              <DatePicker
+                className='datepicker'
+                label=' '
+                value={dateValueTo}
+                onChange={(newValue) => setDateValueTo(moment(newValue).format('YYYY-MM-DD'))}
+                renderInput={(params) => (
+                  <TextField {...params} />
+                )}
+              />
+            </LocalizationProvider>
+          </Box>
+          <div className='filterBlock_buttons'>
+            <button
+              onClick={() => filterFunc()}
+              className='filterBlock_button'
+            >
+              Фильтровать
+            </button>
+            <img
+              onClick={() => deleteFilter()}
+              src={close_filter}
+              alt='close_filter'
+            />
+          </div>
+        </div>}
       </div>}
-    </div>}
     </>
   )
 }
